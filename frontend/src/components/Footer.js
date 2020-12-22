@@ -1,16 +1,22 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col, Navbar } from 'react-bootstrap';
 
 const Footer = () => {
   return (
     <footer>
-      <Container>
+      <Navbar
+        bg="dark"
+        variant="dark"
+        expand="lg"
+        className="align-items-center justify-content-center"
+        collapseOnSelect
+      >
         <Row>
-          <Col className="text-center py-3">
+          <Col className="text-center text-white py-3">
             Copyright &copy; ProShop 2020. All rights reserved.
           </Col>
         </Row>
-      </Container>
+      </Navbar>
     </footer>
   );
 };
