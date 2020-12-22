@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'react-bootstrap';
 
 const Message = ({ variant, children }) => {
-  return <Alert variant={variant}>{children}</Alert>;
+  const [show, setShow] = useState(true);
+
+  setTimeout(() => setShow(false), 2500);
+  return (
+    <Alert show={show} variant={variant} transition>
+      {children}
+    </Alert>
+  );
 };
 
 Message.defaultProps = {
