@@ -13,10 +13,7 @@ const ProfileScreen = ({ history }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
-
-  if (message !== null) {
-    setTimeout(() => setMessage(null), 3000);
-  }
+  const [sMessage, setSMessage] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -48,6 +45,9 @@ const ProfileScreen = ({ history }) => {
       setMessage('Passwords do not match');
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      if (success) {
+        setSMessage('Profile Updated');
+      }
       setPassword('');
       setConfirmPassword('');
     }
@@ -57,11 +57,9 @@ const ProfileScreen = ({ history }) => {
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
-        {message && message !== null && (
-          <Message variant="danger">{message}</Message>
-        )}
+        {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
-        {success && <Message variant="success">Profile Updated</Message>}
+        {sMessage && <Message variant="success">{sMessage}</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
