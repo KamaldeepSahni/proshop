@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 import { createOrder } from '../actions/orderActions';
+import { clearCart } from '../actions/cartActions';
 
 const PlaceOrderScreen = ({ history }) => {
   const cart = useSelector(state => state.cart);
@@ -60,6 +61,7 @@ const PlaceOrderScreen = ({ history }) => {
         totalPrice: cart.totalPrice,
       })
     );
+    dispatch(clearCart());
   };
 
   return (
