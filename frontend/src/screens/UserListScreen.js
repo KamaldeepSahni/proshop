@@ -1,21 +1,26 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { listUsers } from '../actions/userActions';
+import { listUsers, deleteUser } from '../actions/userActions';
 
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const UserListScreen = ({ history }) => {
+const UserListScreen = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const userList = useSelector(state => state.userList);
   const { loading, error, users } = userList;
 
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
+
+  const userDelete = useSelector(state => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -24,10 +29,12 @@ const UserListScreen = ({ history }) => {
       history.push('/login');
     }
     // eslint-disable-next-line
-  }, [dispatch, history]);
+  }, [dispatch, history, successDelete]);
 
-  const deleteHandler = () => {
-    console.log('delete');
+  const deleteHandler = id => {
+    if (window.confirm('Are you sure')) {
+      dispatch(deleteUser(id));
+    }
   };
 
   return (
@@ -51,7 +58,7 @@ const UserListScreen = ({ history }) => {
           <tbody>
             {users &&
               users.map(user => (
-                <tr key={users._id}>
+                <tr key={user._id}>
                   <td>{user._id}</td>
                   <td>{user.name}</td>
                   <td>
