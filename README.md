@@ -1,6 +1,6 @@
 # ProShop
 
-> E-Commerce Web Application built wiht MERN Stack and Redux. With User Authentication and Admin Panel.
+> E-Commerce Web Application built with MERN Stack and Redux. With User Authentication and Admin Panel.
 
 ## Usage
 
