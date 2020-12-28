@@ -50,6 +50,7 @@ const App = () => {
             component={ProductEditScreen}
           />
           <Route exact path="/" component={HomeScreen} />
+          <Route exact path="/search/:keyword" component={HomeScreen} />
         </Container>
       </main>
       <Footer />
